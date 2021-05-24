@@ -70,7 +70,7 @@ public class GameBoard {
 
     private boolean checkHorizontalRows() {
         boolean match = false;
-        for (int row = 0; row < 2; row++) {
+        for (int row = 0; row < 3; row++) {
             match = match || areSymbolsMatching(board[row][0], board[row][1], board[row][2]);
         }
         return match;
