@@ -92,4 +92,15 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(1,1);
         assertEquals('X', gameBoard.getGameWinner());
     }
+
+    @Test
+    void shouldBeWinForXWithVerticalSecondRow() throws CoordinatesAlreadyMarkedException {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.markSymbolAtCoordinates(2,2);
+        gameBoard.markSymbolAtCoordinates(3,1);
+        gameBoard.markSymbolAtCoordinates(1,2);
+        gameBoard.markSymbolAtCoordinates(1,3);
+        gameBoard.markSymbolAtCoordinates(3,2);
+        assertEquals('X', gameBoard.getGameWinner());
+    }
 }

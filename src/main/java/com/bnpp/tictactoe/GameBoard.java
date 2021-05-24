@@ -81,7 +81,8 @@ public class GameBoard {
     }
 
     private boolean checkVerticalRows() {
-        return areSymbolsMatching(board[0][0], board[1][0], board[2][0]);
+        return areSymbolsMatching(board[0][0], board[1][0], board[2][0]) ||
+                areSymbolsMatching(board[0][1], board[1][1], board[2][1]);
     }
 
     private void incrementTurnCountAfterMarkSymbol() {
