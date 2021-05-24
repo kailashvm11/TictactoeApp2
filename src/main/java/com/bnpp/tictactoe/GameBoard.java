@@ -13,9 +13,9 @@ public class GameBoard {
         }
     }
 
-    public char getSymbolAtCoordinates(int row, int column) {
+    public Symbol getSymbolAtCoordinates(int row, int column) {
         Coordinates coordinates = new Coordinates(row, column);
-        return board[coordinates.getRow()][coordinates.getColumn()].getValue();
+        return board[coordinates.getRow()][coordinates.getColumn()];
     }
 
     public void markSymbolAtCoordinates(int row, int column) {
