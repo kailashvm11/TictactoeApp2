@@ -151,4 +151,11 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(2,3);
         assertEquals("Game ended in Draw", gameBoard.getGameStatus());
     }
+
+    @Test
+    void shouldBeGameInProgressAfterFirstTurn() throws CoordinatesAlreadyMarkedException {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.markSymbolAtCoordinates(1,1);
+        assertEquals("Game is in progress", gameBoard.getGameStatus());
+    }
 }

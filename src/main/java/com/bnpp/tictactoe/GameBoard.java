@@ -12,6 +12,7 @@ public class GameBoard {
     private String gameStatus;
 
     public GameBoard() {
+        gameStatus = "Game is in progress";
         for (Symbol[] row : board) {
             Arrays.fill(row, NO_SYMBOL);
         }
