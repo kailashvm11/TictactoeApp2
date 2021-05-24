@@ -82,7 +82,7 @@ public class GameBoard {
 
     private boolean checkVerticalRows() {
         boolean match = false;
-        for (int column = 0; column < 2; column++) {
+        for (int column = 0; column < 3; column++) {
             match = match || areSymbolsMatching(board[0][column], board[1][column], board[2][column]);
         }
         return match;
