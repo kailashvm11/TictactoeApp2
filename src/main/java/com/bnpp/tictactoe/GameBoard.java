@@ -17,6 +17,10 @@ public class GameBoard {
 
     public Symbol getSymbolAtCoordinates(int row, int column) {
         Coordinates coordinates = new Coordinates(row, column);
+        return getSymbolFromBoard(coordinates);
+    }
+
+    private Symbol getSymbolFromBoard(Coordinates coordinates) {
         return board[coordinates.getRow()][coordinates.getColumn()];
     }
 
@@ -30,7 +34,7 @@ public class GameBoard {
     }
 
     public boolean isCoordinatesNotFilled(Coordinates coordinates) {
-        return (board[coordinates.getRow()][coordinates.getColumn()].equals(NO_SYMBOL)) ;
+        return (getSymbolFromBoard(coordinates).equals(NO_SYMBOL)) ;
     }
 
     private void updateBoardWithNextSymbol(Coordinates coordinates) {
