@@ -44,16 +44,20 @@ public class GameBoard {
 
     private void updateBoardWithNextSymbol(Coordinates coordinates) {
         board[coordinates.getRow()][coordinates.getColumn()] = getNextSymbol();
-        if (turnCount >= 5) {
-            if(isGameWon()) {
-                gameWinner = getNextSymbol().getValue();
-            }
-        }
+        updateGameWinnerIfPatternMatches();
         incrementTurnCountAfterMarkSymbol();
     }
 
     private Symbol getNextSymbol() {
         return turnCount % 2  == 0 ? NOUGHT : CROSS;
+    }
+
+    private void updateGameWinnerIfPatternMatches() {
+        if (turnCount >= 5) {
+            if(isGameWon()) {
+                gameWinner = getNextSymbol().getValue();
+            }
+        }
     }
 
     private boolean isGameWon() {
