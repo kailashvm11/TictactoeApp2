@@ -65,8 +65,9 @@ public class GameBoard {
     }
 
     private boolean isGameWon() {
-        return checkHorizontalRows() || checkVerticalRows();
+        return checkHorizontalRows() || checkVerticalRows() || checkFrontDiagonalRow();
     }
+
 
     private boolean checkHorizontalRows() {
         boolean match = false;
@@ -86,6 +87,10 @@ public class GameBoard {
             match = match || areSymbolsMatching(board[0][column], board[1][column], board[2][column]);
         }
         return match;
+    }
+
+    private boolean checkFrontDiagonalRow() {
+        return areSymbolsMatching(board[0][0],board[1][1],board[2][2]);
     }
 
     private void incrementTurnCountAfterMarkSymbol() {
