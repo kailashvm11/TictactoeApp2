@@ -65,17 +65,20 @@ public class GameBoard {
     }
 
     private boolean isGameWon() {
-        return checkHorizontalFirstRow() || checkHorizontalSecondRow();
+        return checkHorizontalRows();
     }
 
-    private boolean checkHorizontalFirstRow() {
-        return  (board[0][0] == board[0][1] && board[0][0] == board[0][2]);
+    private boolean checkHorizontalRows() {
+        boolean match = false;
+        for (int row = 0; row < 2; row++) {
+            match = match || areSymbolsMatching(board[row][0], board[row][1], board[row][2]);
+        }
+        return match;
     }
 
-    private boolean checkHorizontalSecondRow() {
-        return (board[1][0] == board[1][1] && board[1][0] == board[1][2]);
+    private boolean areSymbolsMatching(Symbol symbol1, Symbol symbol2, Symbol symbol3) {
+        return symbol1 == symbol2 && symbol1 == symbol3 && symbol1 != NO_SYMBOL;
     }
-
 
     private void incrementTurnCountAfterMarkSymbol() {
         turnCount++;
