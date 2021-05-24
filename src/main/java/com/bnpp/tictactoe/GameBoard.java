@@ -8,11 +8,13 @@ public class GameBoard {
     }
 
     public char getSymbolAtCoordinates(int row, int column) {
-        return board[row - 1][column - 1];
+        Coordinates coordinates = new Coordinates(row, column);
+        return board[coordinates.getRow()][coordinates.getColumn()];
     }
 
     public void markSymbolAtCoordinates(int row, int column) {
-        board[row - 1][column -1] = 'X';
+        Coordinates coordinates = new Coordinates(row, column);
+        board[coordinates.getRow()][coordinates.getColumn()] = 'X';
     }
 
 }
