@@ -159,4 +159,43 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(1,1);
         assertEquals(IN_PROGRESS, gameBoard.getGameStatus());
     }
+
+
+    @Test
+    void shouldBeWinForOWithHorizontalThirdRow() throws CoordinatesAlreadyMarkedException {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.markSymbolAtCoordinates(1,2);
+        gameBoard.markSymbolAtCoordinates(3,2);
+        gameBoard.markSymbolAtCoordinates(1,1);
+        gameBoard.markSymbolAtCoordinates(3,1);
+        gameBoard.markSymbolAtCoordinates(2,3);
+        gameBoard.markSymbolAtCoordinates(3,3);
+        assertEquals(NOUGHT_WINS, gameBoard.getGameStatus());
+    }
+
+    @Test
+    void shouldBeWinForOWithDiaganolRow() throws CoordinatesAlreadyMarkedException {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.markSymbolAtCoordinates(1,2);
+        gameBoard.markSymbolAtCoordinates(3,3);
+        gameBoard.markSymbolAtCoordinates(1,3);
+        gameBoard.markSymbolAtCoordinates(1,1);
+        gameBoard.markSymbolAtCoordinates(2,3);
+        gameBoard.markSymbolAtCoordinates(2,2);
+        assertEquals(NOUGHT_WINS, gameBoard.getGameStatus());
+    }
+
+    @Test
+    void shouldBeWinForOWithVerticalThirdRow() throws CoordinatesAlreadyMarkedException {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.markSymbolAtCoordinates(2,2);
+        gameBoard.markSymbolAtCoordinates(3,1);
+        gameBoard.markSymbolAtCoordinates(1,3);
+        gameBoard.markSymbolAtCoordinates(3,2);
+        gameBoard.markSymbolAtCoordinates(2,3);
+        gameBoard.markSymbolAtCoordinates(1,2);
+        gameBoard.markSymbolAtCoordinates(1,1);
+        gameBoard.markSymbolAtCoordinates(3,3);
+        assertEquals(NOUGHT_WINS, gameBoard.getGameStatus());
+    }
 }
