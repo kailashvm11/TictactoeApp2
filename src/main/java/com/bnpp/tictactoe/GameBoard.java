@@ -4,15 +4,16 @@ import com.bnpp.tictactoe.exception.CoordinatesAlreadyMarkedException;
 import java.util.Arrays;
 
 import static com.bnpp.tictactoe.Symbol.*;
+import static com.bnpp.tictactoe.GameStatus.*;
 
 public class GameBoard {
     private Symbol[][] board = new Symbol[3][3];
     private int turnCount = 1;
     private char gameWinner;
-    private String gameStatus;
+    private GameStatus gameStatus;
 
     public GameBoard() {
-        gameStatus = "Game is in progress";
+        gameStatus = IN_PROGRESS;
         for (Symbol[] row : board) {
             Arrays.fill(row, NO_SYMBOL);
         }
@@ -22,11 +23,11 @@ public class GameBoard {
         return gameWinner;
     }
 
-    public String getGameStatus() {
+    public GameStatus getGameStatus() {
         return gameStatus;
     }
 
-    public void setGameStatus(String gameStatus) {
+    public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
     }
 
@@ -78,7 +79,7 @@ public class GameBoard {
 
     private void checkForDraw() {
         if (turnCount == 9) {
-            gameStatus = "Game ended in Draw";
+            gameStatus = DRAW;
         }
     }
 

@@ -4,6 +4,7 @@ import com.bnpp.tictactoe.exception.CoordinatesAlreadyMarkedException;
 import org.junit.jupiter.api.Test;
 
 import static com.bnpp.tictactoe.Symbol.*;
+import static com.bnpp.tictactoe.GameStatus.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -149,13 +150,13 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(1,2);
         gameBoard.markSymbolAtCoordinates(3,2);
         gameBoard.markSymbolAtCoordinates(2,3);
-        assertEquals("Game ended in Draw", gameBoard.getGameStatus());
+        assertEquals(DRAW, gameBoard.getGameStatus());
     }
 
     @Test
     void shouldBeGameInProgressAfterFirstTurn() throws CoordinatesAlreadyMarkedException {
         GameBoard gameBoard = new GameBoard();
         gameBoard.markSymbolAtCoordinates(1,1);
-        assertEquals("Game is in progress", gameBoard.getGameStatus());
+        assertEquals(IN_PROGRESS, gameBoard.getGameStatus());
     }
 }
