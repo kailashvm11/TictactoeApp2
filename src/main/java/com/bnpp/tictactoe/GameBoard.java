@@ -18,6 +18,20 @@ public class GameBoard {
         }
     }
 
+    public String getBoard() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("---------\n");
+        for (Symbol[] row : board) {
+            sb.append("| ");
+            for (Symbol cell : row) {
+                sb.append(cell.getValue()).append(" ");
+            }
+            sb.append("|\n");
+        }
+        sb.append("---------\n");
+        return sb.toString();
+    }
+
     public GameStatus getGameStatus() {
         return gameStatus;
     }

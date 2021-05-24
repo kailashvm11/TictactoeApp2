@@ -25,4 +25,23 @@ public class TictactoeAppTest {
                 .getMessage());
 
     }
+
+    @Test
+    void shouldDisplayEmptyGrid() {
+        Logger appLogger = (Logger) LoggerFactory.getLogger(TictactoeApp.class);
+        ListAppender<ILoggingEvent> listAppender;
+        listAppender = new ListAppender<>();
+        listAppender.start();
+        appLogger.addAppender(listAppender);
+        TictactoeApp tictactoeApp = new TictactoeApp();
+        tictactoeApp.start();
+        List<ILoggingEvent> logsList = listAppender.list;
+        StringBuilder sb = new StringBuilder();
+        sb.append("---------\n");
+        sb.append("|       |\n");
+        sb.append("|       |\n");
+        sb.append("|       |\n");
+        sb.append("---------\n");
+        assertEquals(sb.toString(), logsList.get(1).getMessage());
+    }
 }
