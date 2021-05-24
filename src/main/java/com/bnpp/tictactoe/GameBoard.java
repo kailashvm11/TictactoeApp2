@@ -9,7 +9,6 @@ import static com.bnpp.tictactoe.GameStatus.*;
 public class GameBoard {
     private Symbol[][] board = new Symbol[3][3];
     private int turnCount = 1;
-    private char gameWinner;
     private GameStatus gameStatus;
 
     public GameBoard() {
@@ -17,10 +16,6 @@ public class GameBoard {
         for (Symbol[] row : board) {
             Arrays.fill(row, NO_SYMBOL);
         }
-    }
-
-    public char getGameWinner() {
-        return gameWinner;
     }
 
     public GameStatus getGameStatus() {
@@ -70,7 +65,7 @@ public class GameBoard {
     private void updateGameWinnerIfPatternMatches() {
         if (turnCount >= 5) {
             if(isGameWon()) {
-                gameWinner = getNextSymbol().getValue();
+                gameStatus = getNextSymbol().getValue() == 'X' ? CROSS_WINS : NOUGHT_WINS;
             } else {
                 checkForDraw();
             }

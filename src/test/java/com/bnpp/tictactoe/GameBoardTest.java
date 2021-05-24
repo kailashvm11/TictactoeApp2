@@ -58,7 +58,7 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(1,2);
         gameBoard.markSymbolAtCoordinates(3,2);
         gameBoard.markSymbolAtCoordinates(1,3);
-        assertEquals('X', gameBoard.getGameWinner());
+        assertEquals(CROSS_WINS, gameBoard.getGameStatus());
     }
 
     @Test
@@ -69,7 +69,7 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(2,2);
         gameBoard.markSymbolAtCoordinates(1,2);
         gameBoard.markSymbolAtCoordinates(2,3);
-        assertEquals('X', gameBoard.getGameWinner());
+        assertEquals(CROSS_WINS, gameBoard.getGameStatus());
     }
 
     @Test
@@ -80,7 +80,7 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(3,2);
         gameBoard.markSymbolAtCoordinates(2,2);
         gameBoard.markSymbolAtCoordinates(3,3);
-        assertEquals('X', gameBoard.getGameWinner());
+        assertEquals(CROSS_WINS, gameBoard.getGameStatus());
     }
 
     @Test
@@ -91,7 +91,7 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(2,1);
         gameBoard.markSymbolAtCoordinates(1,2);
         gameBoard.markSymbolAtCoordinates(1,1);
-        assertEquals('X', gameBoard.getGameWinner());
+        assertEquals(CROSS_WINS, gameBoard.getGameStatus());
     }
 
     @Test
@@ -102,7 +102,7 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(1,2);
         gameBoard.markSymbolAtCoordinates(1,3);
         gameBoard.markSymbolAtCoordinates(3,2);
-        assertEquals('X', gameBoard.getGameWinner());
+        assertEquals(CROSS_WINS, gameBoard.getGameStatus());
     }
 
     @Test
@@ -113,7 +113,7 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(1,3);
         gameBoard.markSymbolAtCoordinates(1,2);
         gameBoard.markSymbolAtCoordinates(3,3);
-        assertEquals('X', gameBoard.getGameWinner());
+        assertEquals(CROSS_WINS, gameBoard.getGameStatus());
     }
 
     @Test
@@ -124,7 +124,7 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(1,1);
         gameBoard.markSymbolAtCoordinates(1,2);
         gameBoard.markSymbolAtCoordinates(3,3);
-        assertEquals('X', gameBoard.getGameWinner());
+        assertEquals(CROSS_WINS, gameBoard.getGameStatus());
     }
 
     @Test
@@ -135,7 +135,7 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(3,1);
         gameBoard.markSymbolAtCoordinates(1,2);
         gameBoard.markSymbolAtCoordinates(1,3);
-        assertEquals('X', gameBoard.getGameWinner());
+        assertEquals(CROSS_WINS, gameBoard.getGameStatus());
     }
 
     @Test
