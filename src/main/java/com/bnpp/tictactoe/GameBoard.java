@@ -1,4 +1,6 @@
 package com.bnpp.tictactoe;
+import com.bnpp.tictactoe.exception.CoordinatesAlreadyMarkedException;
+
 import java.util.Arrays;
 
 import static com.bnpp.tictactoe.Symbol.*;
@@ -18,9 +20,17 @@ public class GameBoard {
         return board[coordinates.getRow()][coordinates.getColumn()];
     }
 
-    public void markSymbolAtCoordinates(int row, int column) {
+    public void markSymbolAtCoordinates(int row, int column) throws CoordinatesAlreadyMarkedException {
         Coordinates coordinates = new Coordinates(row, column);
-        updateBoardWithNextSymbol(coordinates);
+        if (isCoordinatesNotFilled(coordinates)) {
+            updateBoardWithNextSymbol(coordinates);
+        } else {
+            throw new CoordinatesAlreadyMarkedException("This cell is already filled. Please enter a new one");
+        }
+    }
+
+    public boolean isCoordinatesNotFilled(Coordinates coordinates) {
+        return (board[coordinates.getRow()][coordinates.getColumn()].equals(NO_SYMBOL)) ;
     }
 
     private void updateBoardWithNextSymbol(Coordinates coordinates) {
