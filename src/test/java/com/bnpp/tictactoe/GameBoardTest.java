@@ -29,4 +29,13 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(1,1);
         assertThrows(CoordinatesAlreadyMarkedException.class,() -> gameBoard.markSymbolAtCoordinates(1,1));
     }
+
+    @Test
+    void shouldUpdateSymbolXforThirdMark() throws CoordinatesAlreadyMarkedException {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.markSymbolAtCoordinates(1,1);
+        gameBoard.markSymbolAtCoordinates(2,1);
+        gameBoard.markSymbolAtCoordinates(2,2);
+        assertEquals(CROSS, gameBoard.getSymbolAtCoordinates(2,2));
+    }
 }

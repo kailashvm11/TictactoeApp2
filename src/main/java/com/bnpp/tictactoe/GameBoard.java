@@ -47,10 +47,10 @@ public class GameBoard {
     }
 
     private Symbol getNextSymbol() {
-        if (turnCount == 1) {
-            return CROSS;
+        if (turnCount == 2) {
+            return NOUGHT;
         }
-        return NOUGHT;
+        return CROSS;
     }
 
 }
