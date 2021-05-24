@@ -38,4 +38,14 @@ class GameBoardTest {
         gameBoard.markSymbolAtCoordinates(2,2);
         assertEquals(CROSS, gameBoard.getSymbolAtCoordinates(2,2));
     }
+
+    @Test
+    void shouldUpdateSymbol0forFourthMark() throws CoordinatesAlreadyMarkedException {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.markSymbolAtCoordinates(1,1);
+        gameBoard.markSymbolAtCoordinates(2,1);
+        gameBoard.markSymbolAtCoordinates(2,2);
+        gameBoard.markSymbolAtCoordinates(3,1);
+        assertEquals(NOUGHT, gameBoard.getSymbolAtCoordinates(3,1));
+    }
 }
