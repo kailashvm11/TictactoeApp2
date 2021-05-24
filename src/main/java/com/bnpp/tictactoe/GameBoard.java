@@ -43,9 +43,13 @@ public class GameBoard {
     }
 
     private void updateBoardWithNextSymbol(Coordinates coordinates) {
-        board[coordinates.getRow()][coordinates.getColumn()] = getNextSymbol();
+        updateCoordinatesWithNextSymbol(coordinates);
         updateGameWinnerIfPatternMatches();
         incrementTurnCountAfterMarkSymbol();
+    }
+
+    private void updateCoordinatesWithNextSymbol(Coordinates coordinates) {
+        board[coordinates.getRow()][coordinates.getColumn()] = getNextSymbol();
     }
 
     private Symbol getNextSymbol() {
