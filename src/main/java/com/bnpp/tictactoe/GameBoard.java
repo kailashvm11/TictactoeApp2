@@ -15,12 +15,15 @@ public class GameBoard {
 
     public void markSymbolAtCoordinates(int row, int column) {
         Coordinates coordinates = new Coordinates(row, column);
-        if (turnCount == 1) {
-            board[coordinates.getRow()][coordinates.getColumn()] = 'X';
-        } else if (turnCount == 2) {
-            board[coordinates.getRow()][coordinates.getColumn()] = 'O';
-        }
+        board[coordinates.getRow()][coordinates.getColumn()] = getNextSymbol();
         turnCount++;
+    }
+
+    private char getNextSymbol() {
+        if (turnCount == 1) {
+            return 'X';
+        }
+        return 'O';
     }
 
 }
