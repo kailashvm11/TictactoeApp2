@@ -16,6 +16,10 @@ public class GameBoard {
     public void markSymbolAtCoordinates(int row, int column) {
         Coordinates coordinates = new Coordinates(row, column);
         board[coordinates.getRow()][coordinates.getColumn()] = getNextSymbol();
+        incrementTurnCountAfterMarkSymbol();
+    }
+
+    private void incrementTurnCountAfterMarkSymbol() {
         turnCount++;
     }
 
