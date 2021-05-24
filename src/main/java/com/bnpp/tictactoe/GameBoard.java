@@ -9,6 +9,7 @@ public class GameBoard {
     private Symbol[][] board = new Symbol[3][3];
     private int turnCount = 1;
     private char gameWinner;
+    private String gameStatus;
 
     public GameBoard() {
         for (Symbol[] row : board) {
@@ -18,6 +19,14 @@ public class GameBoard {
 
     public char getGameWinner() {
         return gameWinner;
+    }
+
+    public String getGameStatus() {
+        return gameStatus;
+    }
+
+    public void setGameStatus(String gameStatus) {
+        this.gameStatus = gameStatus;
     }
 
     public Symbol getSymbolAtCoordinates(int row, int column) {
@@ -60,7 +69,15 @@ public class GameBoard {
         if (turnCount >= 5) {
             if(isGameWon()) {
                 gameWinner = getNextSymbol().getValue();
+            } else {
+                checkForDraw();
             }
+        }
+    }
+
+    private void checkForDraw() {
+        if (turnCount == 9) {
+            gameStatus = "Game ended in Draw";
         }
     }
 
