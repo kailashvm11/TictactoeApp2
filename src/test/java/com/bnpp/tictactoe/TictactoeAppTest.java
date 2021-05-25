@@ -65,7 +65,7 @@ public class TictactoeAppTest {
             TictactoeApp app = new TictactoeApp();
             app.start();
             List<ILoggingEvent> logsList = listAppender.list;
-            assertThat(logsList.get(logsList.size() - 1).getMessage()).containsOnlyOnce("| X     |");
+            assertThat(logsList.get(3).getMessage()).containsOnlyOnce("| X     |");
         }
 
         private void setInput(String input) {
