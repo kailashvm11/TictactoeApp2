@@ -15,7 +15,7 @@ public class TictactoeApp {
         String restart;
         do {
             play();
-            log.info(gameBoard.getGameStatus().getValue());
+            displayGameStatus();
             restart = getRestartInput();
         } while (restart.equals("R"));
     }
@@ -66,6 +66,11 @@ public class TictactoeApp {
     private int getInteger(char input) {
         return Integer.parseInt(String.valueOf(input));
     }
+
+    private void displayGameStatus() {
+        log.info(gameBoard.getGameStatus().getValue());
+    }
+
 
     private String getRestartInput() {
         log.info("Enter R to restart a new Game");
