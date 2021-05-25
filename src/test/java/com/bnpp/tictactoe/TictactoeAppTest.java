@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 
+import static com.bnpp.tictactoe.GameStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -29,7 +30,7 @@ public class TictactoeAppTest {
             listAppender = new ListAppender<>();
             listAppender.start();
             appLogger.addAppender(listAppender);
-            setInput("1,1\n");
+            setInput("1,1\n2,1\n2,2\n2,3\n3,3\n");
             tictactoeApp = new TictactoeApp();
         }
 
@@ -92,7 +93,7 @@ public class TictactoeAppTest {
             listAppender = new ListAppender<>();
             listAppender.start();
             appLogger.addAppender(listAppender);
-            setInput("123\n");
+            setInput("123\n1,1\n2,1\n2,2\n2,3\n3,3\n");
             tictactoeApp = new TictactoeApp();
             tictactoeApp.start();
             List<ILoggingEvent> logsList = listAppender.list;
@@ -105,6 +106,40 @@ public class TictactoeAppTest {
         private void setInput(String input) {
             InputStream in = new ByteArrayInputStream(input.getBytes());
             System.setIn(in);
+        }
+
+        @Nested
+        @DisplayName("Input test case for winning scenario")
+        class InputMockTestForXWin {
+
+            TictactoeApp tictactoeApp;
+            Logger appLogger = (Logger) LoggerFactory.getLogger(TictactoeApp.class);
+            ListAppender<ILoggingEvent> listAppender;
+
+            @AfterEach
+            public void restoreSystemInput() {
+                System.setIn(System.in);
+            }
+
+            @Test
+            void shouldDisplayStartMessage() throws CoordinatesAlreadyMarkedException {
+                listAppender = new ListAppender<>();
+                listAppender.start();
+                appLogger.addAppender(listAppender);
+                setInput("1,1\n2,1\n2,2\n2,3\n3,3\n");
+                tictactoeApp = new TictactoeApp();
+                tictactoeApp.start();
+                List<ILoggingEvent> logsList = listAppender.list;
+                org.assertj.core.api.Assertions.assertThat(listAppender.list)
+                        .extracting(ILoggingEvent::getFormattedMessage)
+                        .contains(CROSS_WINS.getValue());
+
+            }
+
+            private void setInput(String input) {
+                InputStream in = new ByteArrayInputStream(input.getBytes());
+                System.setIn(in);
+            }
         }
     }
 }

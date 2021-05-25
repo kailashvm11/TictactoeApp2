@@ -15,18 +15,21 @@ public class TictactoeApp {
         log.info("Starting a new Tic-tac-toe Game");
         printBoard();
         play();
+        log.info(gameBoard.getGameStatus().getValue());
     }
 
     private void play() throws CoordinatesAlreadyMarkedException {
-        log.info("Enter row and column to mark : " + gameBoard.getNextSymbol().getValue());
-        try {
-            String input = readInput();
-            isInputValid(input);
-            gameBoard.markSymbolAtCoordinates(getInteger(input.charAt(0)), getInteger(input.charAt(2)));
-        } catch (IncorrectInputFormatException e) {
-            log.info(e.getMessage());
+        while(gameBoard.getGameStatus() == GameStatus.IN_PROGRESS) {
+            log.info("Enter row and column to mark : " + gameBoard.getNextSymbol().getValue());
+            try {
+                String input = readInput();
+                isInputValid(input);
+                gameBoard.markSymbolAtCoordinates(getInteger(input.charAt(0)), getInteger(input.charAt(2)));
+            } catch (IncorrectInputFormatException e) {
+                log.info(e.getMessage());
+            }
+            printBoard();
         }
-        printBoard();
     }
 
     private void printBoard() {
@@ -58,7 +61,4 @@ public class TictactoeApp {
     private int getInteger(char input) {
         return Integer.parseInt(String.valueOf(input));
     }
-
-
-
 }
