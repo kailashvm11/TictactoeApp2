@@ -74,4 +74,37 @@ public class TictactoeAppTest {
         }
     }
 
+    @Nested
+    @DisplayName("Input test case with alphabets")
+    class InputMockTestForThrowingException {
+
+        TictactoeApp tictactoeApp;
+        Logger appLogger = (Logger) LoggerFactory.getLogger(TictactoeApp.class);
+        ListAppender<ILoggingEvent> listAppender;
+
+        @AfterEach
+        public void restoreSystemInput() {
+            System.setIn(System.in);
+        }
+
+        @Test
+        void shouldDisplayStartMessage() throws CoordinatesAlreadyMarkedException {
+            listAppender = new ListAppender<>();
+            listAppender.start();
+            appLogger.addAppender(listAppender);
+            setInput("123\n");
+            tictactoeApp = new TictactoeApp();
+            tictactoeApp.start();
+            List<ILoggingEvent> logsList = listAppender.list;
+            org.assertj.core.api.Assertions.assertThat(listAppender.list)
+                    .extracting(ILoggingEvent::getFormattedMessage)
+                    .contains("Please enter only two numbers between 1 and 3 separated by a comma");
+
+        }
+
+        private void setInput(String input) {
+            InputStream in = new ByteArrayInputStream(input.getBytes());
+            System.setIn(in);
+        }
+    }
 }
