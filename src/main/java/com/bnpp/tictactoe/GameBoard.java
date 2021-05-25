@@ -72,7 +72,7 @@ public class GameBoard {
         board[coordinates.getRow()][coordinates.getColumn()] = getNextSymbol();
     }
 
-    private Symbol getNextSymbol() {
+    public Symbol getNextSymbol() {
         return turnCount % 2  == 0 ? NOUGHT : CROSS;
     }
 
