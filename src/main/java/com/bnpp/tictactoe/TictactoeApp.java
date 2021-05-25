@@ -11,21 +11,21 @@ public class TictactoeApp {
     private static final Logger log = LoggerFactory.getLogger(TictactoeApp.class);
     private Scanner scanner = new Scanner(System.in);
 
-    public void start() throws CoordinatesAlreadyMarkedException {
+    public void start() {
         log.info("Starting a new Tic-tac-toe Game");
         printBoard();
         play();
         log.info(gameBoard.getGameStatus().getValue());
     }
 
-    private void play() throws CoordinatesAlreadyMarkedException {
+    private void play() {
         while(gameBoard.getGameStatus() == GameStatus.IN_PROGRESS) {
             log.info("Enter row and column to mark : " + gameBoard.getNextSymbol().getValue());
             try {
                 String input = readInput();
                 isInputValid(input);
                 gameBoard.markSymbolAtCoordinates(getInteger(input.charAt(0)), getInteger(input.charAt(2)));
-            } catch (IncorrectInputFormatException e) {
+            } catch (IncorrectInputFormatException | CoordinatesAlreadyMarkedException e) {
                 log.info(e.getMessage());
             }
             printBoard();

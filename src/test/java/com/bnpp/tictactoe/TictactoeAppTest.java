@@ -40,7 +40,7 @@ public class TictactoeAppTest {
         }
 
         @Test
-        void shouldDisplayStartMessage() throws CoordinatesAlreadyMarkedException {
+        void shouldDisplayStartMessage() {
             tictactoeApp.start();
             List<ILoggingEvent> logsList = listAppender.list;
             assertEquals("Starting a new Tic-tac-toe Game", logsList.get(0)
@@ -49,7 +49,7 @@ public class TictactoeAppTest {
         }
 
         @Test
-        void shouldDisplayEmptyGrid() throws CoordinatesAlreadyMarkedException {
+        void shouldDisplayEmptyGrid() {
             tictactoeApp.start();
             List<ILoggingEvent> logsList = listAppender.list;
             StringBuilder sb = new StringBuilder();
@@ -62,7 +62,7 @@ public class TictactoeAppTest {
         }
 
         @Test
-        void shouldDisplayGridAfterUpdate() throws CoordinatesAlreadyMarkedException {
+        void shouldDisplayGridAfterUpdate() {
             TictactoeApp app = new TictactoeApp();
             app.start();
             List<ILoggingEvent> logsList = listAppender.list;
@@ -89,7 +89,7 @@ public class TictactoeAppTest {
         }
 
         @Test
-        void shouldDisplayStartMessage() throws CoordinatesAlreadyMarkedException {
+        void shouldDisplayStartMessage() {
             listAppender = new ListAppender<>();
             listAppender.start();
             appLogger.addAppender(listAppender);
@@ -123,7 +123,7 @@ public class TictactoeAppTest {
         }
 
         @Test
-        void shouldDisplayStartMessage() throws CoordinatesAlreadyMarkedException {
+        void shouldDisplayStartMessage()  {
             listAppender = new ListAppender<>();
             listAppender.start();
             appLogger.addAppender(listAppender);
@@ -134,6 +134,40 @@ public class TictactoeAppTest {
             org.assertj.core.api.Assertions.assertThat(listAppender.list)
                     .extracting(ILoggingEvent::getFormattedMessage)
                     .contains(CROSS_WINS.getValue());
+
+        }
+
+        private void setInput(String input) {
+            InputStream in = new ByteArrayInputStream(input.getBytes());
+            System.setIn(in);
+        }
+    }
+
+    @Nested
+    @DisplayName("Input test case with already marked coordinates")
+    class InputMockTestForThrowingAlreadyMarkedException {
+
+        TictactoeApp tictactoeApp;
+        Logger appLogger = (Logger) LoggerFactory.getLogger(TictactoeApp.class);
+        ListAppender<ILoggingEvent> listAppender;
+
+        @AfterEach
+        public void restoreSystemInput() {
+            System.setIn(System.in);
+        }
+
+        @Test
+        void shouldDisplayAlreadyMarkedMessage() {
+            listAppender = new ListAppender<>();
+            listAppender.start();
+            appLogger.addAppender(listAppender);
+            setInput("1,1\n1,1\n2,1\n2,2\n2,3\n3,3\n");
+            tictactoeApp = new TictactoeApp();
+            tictactoeApp.start();
+            List<ILoggingEvent> logsList = listAppender.list;
+            org.assertj.core.api.Assertions.assertThat(listAppender.list)
+                    .extracting(ILoggingEvent::getFormattedMessage)
+                    .contains("This cell is already filled. Please enter a new one");
 
         }
 
