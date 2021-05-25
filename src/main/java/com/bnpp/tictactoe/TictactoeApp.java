@@ -13,7 +13,7 @@ public class TictactoeApp {
 
     public void start() throws CoordinatesAlreadyMarkedException {
         log.info("Starting a new Tic-tac-toe Game");
-        log.info(gameBoard.getBoard());
+        printBoard();
         play();
     }
 
@@ -29,6 +29,10 @@ public class TictactoeApp {
         } catch (IncorrectInputFormatException e) {
             log.info("Please enter only two numbers between 1 and 3 separated by a comma");
         }
+        printBoard();
+    }
+
+    private void printBoard() {
         log.info(gameBoard.getBoard());
     }
 
