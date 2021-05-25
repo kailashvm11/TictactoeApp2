@@ -21,13 +21,10 @@ public class TictactoeApp {
         log.info("Enter row and column to mark : " + gameBoard.getNextSymbol().getValue());
         try {
             String input = readInput();
-            if (isInputValid(input)) {
-                gameBoard.markSymbolAtCoordinates(getInteger(input.charAt(0)), getInteger(input.charAt(2)));
-            } else {
-                throw new IncorrectInputFormatException("Please enter only two numbers between 1 and 3 separated by a comma");
-            }
+            isInputValid(input);
+            gameBoard.markSymbolAtCoordinates(getInteger(input.charAt(0)), getInteger(input.charAt(2)));
         } catch (IncorrectInputFormatException e) {
-            log.info("Please enter only two numbers between 1 and 3 separated by a comma");
+            log.info(e.getMessage());
         }
         printBoard();
     }
@@ -40,8 +37,10 @@ public class TictactoeApp {
         return scanner.nextLine().trim();
     }
 
-    private boolean isInputValid(String input) {
-        return validateLength(input) && validateComma(input) && validateRange(input);
+    private void isInputValid(String input) throws IncorrectInputFormatException {
+        if (!(validateLength(input) && validateComma(input) && validateRange(input))) {
+            throw new IncorrectInputFormatException("Please enter only two numbers between 1 and 3 separated by a comma");
+        }
     }
 
     private boolean validateLength(String input) {
