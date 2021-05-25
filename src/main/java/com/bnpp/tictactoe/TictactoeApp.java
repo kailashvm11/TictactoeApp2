@@ -18,11 +18,19 @@ public class TictactoeApp {
 
     private void play() throws CoordinatesAlreadyMarkedException {
         log.info("Enter row and column to mark : " + gameBoard.getNextSymbol().getValue());
-        String[] input = scanner.nextLine().split(",");
-        int row = Integer.parseInt(input[0]);
-        int column = Integer.parseInt(input[1]);
-        gameBoard.markSymbolAtCoordinates(row, column);
+        String[] input = readInput();
+        gameBoard.markSymbolAtCoordinates(getInteger(input[0]), getInteger(input[1]));
         log.info(gameBoard.getBoard());
     }
+
+    private String[] readInput() {
+        return scanner.nextLine().split(",");
+    }
+
+    private int getInteger(String input) {
+        return Integer.parseInt(input);
+    }
+
+
 
 }
