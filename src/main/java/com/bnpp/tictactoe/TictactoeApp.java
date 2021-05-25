@@ -21,9 +21,21 @@ public class TictactoeApp {
     }
 
     private void play() {
+        startNewGame();
+        getInputAndMarkSymbols();
+    }
+
+    private void startNewGame() {
         log.info("Starting a new Tic-tac-toe Game");
         gameBoard = new GameBoard();
         printBoard();
+    }
+
+    private void printBoard() {
+        log.info(gameBoard.getBoard());
+    }
+
+    private void getInputAndMarkSymbols() {
         while(gameBoard.getGameStatus() == GameStatus.IN_PROGRESS) {
             log.info("Enter row and column to mark : " + gameBoard.getNextSymbol().getValue());
             try {
@@ -35,10 +47,6 @@ public class TictactoeApp {
             }
             printBoard();
         }
-    }
-
-    private void printBoard() {
-        log.info(gameBoard.getBoard());
     }
 
     private String readInput() {
