@@ -12,13 +12,18 @@ public class TictactoeApp {
     private Scanner scanner = new Scanner(System.in);
 
     public void start() {
-        log.info("Starting a new Tic-tac-toe Game");
-        printBoard();
-        play();
-        log.info(gameBoard.getGameStatus().getValue());
+        String restart;
+        do {
+            play();
+            log.info(gameBoard.getGameStatus().getValue());
+            restart = getRestartInput();
+        } while (restart.equals("R"));
     }
 
     private void play() {
+        log.info("Starting a new Tic-tac-toe Game");
+        gameBoard = new GameBoard();
+        printBoard();
         while(gameBoard.getGameStatus() == GameStatus.IN_PROGRESS) {
             log.info("Enter row and column to mark : " + gameBoard.getNextSymbol().getValue());
             try {
@@ -61,4 +66,10 @@ public class TictactoeApp {
     private int getInteger(char input) {
         return Integer.parseInt(String.valueOf(input));
     }
+
+    private String getRestartInput() {
+        log.info("Enter R to restart a new Game");
+        return scanner.nextLine().trim();
+    }
+
 }

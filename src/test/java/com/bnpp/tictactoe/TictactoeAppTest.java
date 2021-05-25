@@ -30,7 +30,7 @@ public class TictactoeAppTest {
             listAppender = new ListAppender<>();
             listAppender.start();
             appLogger.addAppender(listAppender);
-            setInput("1,1\n2,1\n2,2\n2,3\n3,3\n");
+            setInput("1,1\n2,1\n2,2\n2,3\n3,3\nN\n");
             tictactoeApp = new TictactoeApp();
         }
 
@@ -93,7 +93,7 @@ public class TictactoeAppTest {
             listAppender = new ListAppender<>();
             listAppender.start();
             appLogger.addAppender(listAppender);
-            setInput("123\n1,1\n2,1\n2,2\n2,3\n3,3\n");
+            setInput("123\n1,1\n2,1\n2,2\n2,3\n3,3\nN\n");
             tictactoeApp = new TictactoeApp();
             tictactoeApp.start();
             List<ILoggingEvent> logsList = listAppender.list;
@@ -127,7 +127,7 @@ public class TictactoeAppTest {
             listAppender = new ListAppender<>();
             listAppender.start();
             appLogger.addAppender(listAppender);
-            setInput("1,1\n2,1\n2,2\n2,3\n3,3\n");
+            setInput("1,1\n2,1\n2,2\n2,3\n3,3\nN\n");
             tictactoeApp = new TictactoeApp();
             tictactoeApp.start();
             List<ILoggingEvent> logsList = listAppender.list;
@@ -161,13 +161,46 @@ public class TictactoeAppTest {
             listAppender = new ListAppender<>();
             listAppender.start();
             appLogger.addAppender(listAppender);
-            setInput("1,1\n1,1\n2,1\n2,2\n2,3\n3,3\n");
+            setInput("1,1\n1,1\n2,1\n2,2\n2,3\n3,3\nN\n");
             tictactoeApp = new TictactoeApp();
             tictactoeApp.start();
             List<ILoggingEvent> logsList = listAppender.list;
             org.assertj.core.api.Assertions.assertThat(listAppender.list)
                     .extracting(ILoggingEvent::getFormattedMessage)
                     .contains("This cell is already filled. Please enter a new one");
+
+        }
+
+        private void setInput(String input) {
+            InputStream in = new ByteArrayInputStream(input.getBytes());
+            System.setIn(in);
+        }
+    }
+    @Nested
+    @DisplayName("Input test case with restart")
+    class InputMockTestForRestartingTheGame {
+
+        TictactoeApp tictactoeApp;
+        Logger appLogger = (Logger) LoggerFactory.getLogger(TictactoeApp.class);
+        ListAppender<ILoggingEvent> listAppender;
+
+        @AfterEach
+        public void restoreSystemInput() {
+            System.setIn(System.in);
+        }
+
+        @Test
+        void shouldDisplayAlreadyMarkedMessage() {
+            listAppender = new ListAppender<>();
+            listAppender.start();
+            appLogger.addAppender(listAppender);
+            setInput("1,1\n2,1\n2,2\n2,3\n3,3\nR\n3,1\n1,1\n2,1\n2,2\n2,3\n3,3\nN\n");
+            tictactoeApp = new TictactoeApp();
+            tictactoeApp.start();
+            List<ILoggingEvent> logsList = listAppender.list;
+            org.assertj.core.api.Assertions.assertThat(listAppender.list)
+                    .extracting(ILoggingEvent::getFormattedMessage)
+                    .contains(NOUGHT_WINS.getValue());
 
         }
 
