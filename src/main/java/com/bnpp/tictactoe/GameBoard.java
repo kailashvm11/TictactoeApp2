@@ -7,6 +7,7 @@ import static com.bnpp.tictactoe.Symbol.*;
 import static com.bnpp.tictactoe.GameStatus.*;
 
 public class GameBoard {
+    public static final String COORDINATES_ALREADY_MARKED_MESSAGE = "This cell is already filled. Please enter a new one";
     private Symbol[][] board = new Symbol[3][3];
     private int turnCount = 1;
     private GameStatus gameStatus;
@@ -54,7 +55,7 @@ public class GameBoard {
         if (isCoordinatesNotFilled(coordinates)) {
             updateBoardWithNextSymbol(coordinates);
         } else {
-            throw new CoordinatesAlreadyMarkedException("This cell is already filled. Please enter a new one");
+            throw new CoordinatesAlreadyMarkedException(COORDINATES_ALREADY_MARKED_MESSAGE);
         }
     }
 

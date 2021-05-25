@@ -10,6 +10,7 @@ public class TictactoeApp {
     private GameBoard gameBoard = new GameBoard();
     private static final Logger log = LoggerFactory.getLogger(TictactoeApp.class);
     private Scanner scanner = new Scanner(System.in);
+    public static final String INCORRECT_FORMAT_MESSAGE = "Please enter only two numbers between 1 and 3 separated by a comma";
 
     public void start() {
         String restart;
@@ -44,6 +45,7 @@ public class TictactoeApp {
                 gameBoard.markSymbolAtCoordinates(getInteger(input.charAt(0)), getInteger(input.charAt(2)));
             } catch (IncorrectInputFormatException | CoordinatesAlreadyMarkedException e) {
                 log.info(e.getMessage());
+                log.error(e.getMessage());
             }
             printBoard();
         }
@@ -55,7 +57,7 @@ public class TictactoeApp {
 
     private void isInputValid(String input) throws IncorrectInputFormatException {
         if (!(validateLength(input) && validateComma(input) && validateRange(input))) {
-            throw new IncorrectInputFormatException("Please enter only two numbers between 1 and 3 separated by a comma");
+            throw new IncorrectInputFormatException(INCORRECT_FORMAT_MESSAGE);
         }
     }
 
